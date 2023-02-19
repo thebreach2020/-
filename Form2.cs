@@ -37,7 +37,12 @@ namespace соне
             this.textBox4.Clear();
             this.textBox5.Clear();
         }
+        double Factorial(double n)
+        {
+            if (n == 1) return 1;
 
+            return n * Factorial(n - 1);
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
@@ -45,15 +50,53 @@ namespace соне
             int count = int.Parse(this.textBox1.Text);
             double x1 = double.Parse(this.textBox2.Text);
             double x2 = double.Parse(this.textBox3.Text);
-            double h = double.Parse(this.textBox4.Text);
-            var items1 = new object[count];
-            var items2 = new object[count];
+            List<double> items1 = new List<double>();
+            List<double> items2 = new List<double>();
             var dx = double.Parse(this.textBox4.Text);
             var eps = double.Parse(this.textBox5.Text);
-           
+            for (double i = x1; i <= x2; i += dx)
+            {
+                items1.Add(Math.Round(i, 2));
+                items1.Add((i - Math.Sin(i)) / Math.Pow(i, 2));
+            }
+
+            for (double i = x1; i <= x2; i += dx)
+            {
+                items2.Add(Math.Round(i, 2));
+                for (double number = 3, num = 1,sign=1, summa11 = 0; ; number+=2,num+=2,sign++)
+                {
+                    
+                    double k = Math.Pow(-1,sign+1)*Math.Pow(i,num)/Factorial(number);
+                    summa11 += k;
+                    
+                    if (Math.Abs(k) < eps)
+                    {
+                        items2.Add(summa11);
+                        break;
+                    }
+                    
+                }
+                 
+            }
+            var items2obj = new object[items2.Count];
+            for (int i = 0; i < items2.Count; i++)
+            {
+                items2obj[i] = items2[i];
+            }
+            var items1obj = new object[items1.Count];
+            for (int i = 0; i < items1.Count; i++)
+            {
+                items1obj[i] = items1[i];
+            }
+            this.listBox1.Items.AddRange(items1obj);
+            this.listBox2.Items.AddRange(items2obj);
+            }
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void Form2_Load(object sender, EventArgs e)
         {
 
         }
