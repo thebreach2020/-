@@ -57,16 +57,16 @@ namespace соне
             for (double i = x1; i <= x2; i += dx)
             {
                 items1.Add(Math.Round(i, 2));
-                items1.Add((i - Math.Sin(i)) / Math.Pow(i, 2));
+                items1.Add(Math.Log(Math.Pow(1+i,i+0.5)/Math.Sqrt(1-i))-Math.Pow(i,2)-i);
             }
 
             for (double i = x1; i <= x2; i += dx)
             {
                 items2.Add(Math.Round(i, 2));
-                for (double number = 3, num = 1,sign=1, summa11 = 0; ; number+=2,num+=2,sign++)
+                for (double number = 3,  summa11 = 0; ; number+=2)
                 {
                     
-                    double k = Math.Pow(-1,sign+1)*Math.Pow(i,num)/Factorial(number);
+                    double k = Math.Pow(i,number)*((((number-1)*i)-1)/(number*(number-1)));
                     summa11 += k;
                     
                     if (Math.Abs(k) < eps)

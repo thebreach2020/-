@@ -38,28 +38,34 @@ namespace соне
 
         private void button1_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
-            int count = int.Parse(this.textBox1.Text);
-            double x1 = double.Parse(this.textBox2.Text);
-            double x2 = double.Parse(this.textBox3.Text);
-            double A = double.Parse(this.textBox4.Text);
-            var items = new object[count];
-            var dx = (x2 - x1) / (count - 1);
-            var rnd = new Random();
-            for (int i = 0; i < items.Length; i++)
+            if (textBox1.Text==""|textBox2.Text==""| textBox3.Text == "" | textBox4.Text == "")
             {
-                double x = x1 + dx * i;
-                if (x < A)
-                {
-                    items[i]=$"При значении x={x} функция имеет значение {A*Math.Cos(Math.Pow(x,2)/2.0)}";
-                }
-                else
-                {
-                    items[i] =$"При значении x={x} функция имеет значение {A/(2*(Math.Pow(Math.E,x/A)+ Math.Pow(Math.E, -x / A)))}";
-                }
+                MessageBox.Show("Эээ, любезный, кабанчиком ввел строки как положено", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+            else {
+                        listBox1.Items.Clear();
+                        int count = int.Parse(this.textBox1.Text);
+                        double x1 = double.Parse(this.textBox2.Text);
+                        double x2 = double.Parse(this.textBox3.Text);
+                        double A = double.Parse(this.textBox4.Text);
+                        var items = new object[count];
+                        var dx = (x2 - x1) / (count - 1);
+                        var rnd = new Random();
+                        for (int i = 0; i < items.Length; i++)
+                        {
+                            double x = x1 + dx * i;
+                            if (x < A)
+                            {
+                                items[i] = $"При значении x={x} функция имеет значение {A - Math.Sqrt(Math.Pow(A, 2) - Math.Pow(x - A, 2))}";
+                            }
+                            else
+                            {
+                                items[i] = $"При значении x={x} функция имеет значение {A * Math.Pow(x - A, 1.5)}";
+                            }
+                        }
 
-            this.listBox1.Items.AddRange(items);
+                        this.listBox1.Items.AddRange(items);
+                    }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

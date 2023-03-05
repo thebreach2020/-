@@ -62,6 +62,10 @@ namespace соне
             textBox6.Clear();
             dataGridView1.Rows.Clear();
             dataGridView2.Rows.Clear();
+            delimitator1 = 0;
+            delimitator2 = 0;
+            arr1.Clear();
+            arr2.Clear();
             
         }
 
@@ -80,16 +84,23 @@ namespace соне
             {
                 textBox3.Text = "Больше данные добавляться не будут";
                 e.Handled = true;
-            }
-            
-
-                
+            } 
         }
         private void button2_Click(object sender, EventArgs e)
         {
             textBox4.Clear();
             textBox5.Clear();
             textBox6.Clear();
+            if (arr1.Min()<arr2.Min())
+            {
+                textBox4.Text = $"{arr1.Min()}";
+            }
+            else
+            {
+                textBox4.Text = $"{arr2.Min()}";
+            }
+            textBox5.Text = $"{arr1.Min()}";
+            textBox6.Text = $"{arr2.Min()}";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -97,7 +108,5 @@ namespace соне
             dataGridView1.Rows.Clear();
             dataGridView2.Rows.Clear();
         }
-
-        
     }
 }
